@@ -45,6 +45,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    context.read<EmployeeBloc>().add(LoadEmployeeEvent());
+    super.initState();
+  }
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -64,9 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-           
             BlocBuilder<EmployeeBloc, EmployeeState>(
-            builder: (context, state) {
+              builder: (context, state) {
                 if (state is EmployeeLadingState) {
                   return const CircularProgressIndicator();
                 }
@@ -86,13 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 return SizedBox
                     .shrink(); // This will return an empty widget if none of the above conditions are met
               },
-                
-                )
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<CounterCubit>().increment,
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
